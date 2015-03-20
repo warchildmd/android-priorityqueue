@@ -1,6 +1,9 @@
 package ro.mihail.burduja.priorityqueue.adapters;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +25,7 @@ import io.realm.RealmResults;
 import ro.mihail.burduja.priorityqueue.R;
 import ro.mihail.burduja.priorityqueue.realm.Tag;
 import ro.mihail.burduja.priorityqueue.realm.Task;
+import ro.mihail.burduja.priorityqueue.widget.WidgetProvider;
 
 /**
  * Created by Mihail on 1/10/2015.
@@ -135,6 +139,7 @@ public class CustomListAdapter extends BaseAdapter {
                 }
                 realm.commitTransaction();
                 notifyDataSetChanged();
+                WidgetProvider.updateWidget(context);
             }
         });
 

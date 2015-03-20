@@ -5,11 +5,14 @@ package ro.mihail.burduja.priorityqueue.fragments;
  */
 
 import android.app.AlertDialog;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.melnykov.fab.FloatingActionButton;
 
@@ -36,6 +40,7 @@ import ro.mihail.burduja.priorityqueue.R;
 import ro.mihail.burduja.priorityqueue.adapters.CustomListAdapter;
 import ro.mihail.burduja.priorityqueue.realm.Tag;
 import ro.mihail.burduja.priorityqueue.realm.Task;
+import ro.mihail.burduja.priorityqueue.widget.WidgetProvider;
 
 public class ListTasksFragment extends Fragment {
 
@@ -104,6 +109,7 @@ public class ListTasksFragment extends Fragment {
                             }
                             realm.commitTransaction();
                             adapter.notifyDataSetChanged();
+                            WidgetProvider.updateWidget(getActivity());
                         }
 
                     })
@@ -227,6 +233,11 @@ public class ListTasksFragment extends Fragment {
         notifyDataSetChanged("");
 
         listView.setAdapter(adapter);
+        TextView tvEmptyText = new TextView(getActivity());
+        tvEmptyText.setText("You're done!");
+        tvEmptyText.setPadding(20, 20, 20, 20);
+        tvEmptyText.setGravity(Gravity.CENTER_HORIZONTAL);
+        listView.setEmptyView(tvEmptyText);
 
         buttonCreateTask.attachToListView(listView);
 
@@ -266,6 +277,7 @@ public class ListTasksFragment extends Fragment {
 
                             // adapter.removeItem(position);
                             adapter.notifyDataSetChanged();
+                            WidgetProvider.updateWidget(getActivity());
                         }
                     }
                 });

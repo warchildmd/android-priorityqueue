@@ -23,6 +23,35 @@
             android:screenOrientation="portrait"
             android:parentActivityName="ro.mihail.burduja.priorityqueue.ListTasksActivity" >
         </activity>
+        <activity
+            android:name="ro.mihail.burduja.priorityqueue.ShareActivity"
+            android:excludeFromRecents="true"
+            android:finishOnTaskLaunch="true"
+            android:label="Add as task"
+            android:screenOrientation="behind"
+            android:theme="@android:style/Theme.NoDisplay">
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+
+        </activity>
+        <receiver android:name="ro.mihail.burduja.priorityqueue.widget.WidgetProvider" >
+            <intent-filter>
+                <!-- This widget provider receives broadcast with following action
+                name or simply onUpdate of AppWidgetProvider is called -->
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <!-- linking up xml file of appwidget-provider to AppWidgetProvider -->
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+        </receiver>
+        <service
+            android:name="ro.mihail.burduja.priorityqueue.widget.WidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
 </manifest>

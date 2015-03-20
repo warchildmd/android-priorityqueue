@@ -1,6 +1,9 @@
 package ro.mihail.burduja.priorityqueue.fragments;
 
 import android.app.DatePickerDialog;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,6 +32,7 @@ import io.realm.Realm;
 import ro.mihail.burduja.priorityqueue.R;
 import ro.mihail.burduja.priorityqueue.realm.Tag;
 import ro.mihail.burduja.priorityqueue.realm.Task;
+import ro.mihail.burduja.priorityqueue.widget.WidgetProvider;
 
 /**
  * Created by Mihail on 1/10/2015.
@@ -200,6 +204,7 @@ public class CreateTaskFragment extends Fragment {
                         task.getTags().addAll(tags);
                         realm.commitTransaction();
                     }
+                    WidgetProvider.updateWidget(getActivity());
                     getActivity().finish();
                 }
             }
