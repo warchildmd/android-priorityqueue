@@ -16,13 +16,6 @@ import ro.mihail.burduja.priorityqueue.R;
 public class WidgetProvider extends AppWidgetProvider {
 
     public static void updateWidget(Context context) {
-        /*Intent intent = new Intent(context, WidgetProvider.class);
-        intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
-        int ids[] = AppWidgetManager.getInstance(context).
-                getAppWidgetIds(new ComponentName(context, WidgetProvider.class));
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
-        context.sendBroadcast(intent);*/
-
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         ComponentName thisWidget = new ComponentName(context, WidgetProvider.class);
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
@@ -38,10 +31,6 @@ public class WidgetProvider extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager
             appWidgetManager, int[] appWidgetIds) {
 
-        /*int[] appWidgetIds holds ids of multiple instance
-         * of your widget
-         * meaning you are placing more than one widgets on
-         * your homescreen*/
         final int N = appWidgetIds.length;
         for (int i = 0; i < N; ++i) {
             RemoteViews remoteViews = updateWidgetListView(context,
